@@ -1,6 +1,8 @@
 #pragma once
 #include "Card.h"
 #include <vector>
+#include <random>
+#include <algorithm>
 
 using namespace std;
 
@@ -19,5 +21,7 @@ public:
 	int GetCardsRemaining();
 
 	void Reset();
+
+	void PrintDeck();
 };
 

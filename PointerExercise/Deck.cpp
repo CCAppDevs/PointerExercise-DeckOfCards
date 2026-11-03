@@ -7,20 +7,30 @@ Deck::Deck()
 
 void Deck::Shuffle()
 {
+	// create random device
+	random_device rd;
+
+	// seed the engine
+	mt19937 engine(rd());
+
+	// shuffle
+	shuffle(this->cards.begin(), this->cards.end(), engine);
 }
 
 Card Deck::DrawCard()
 {
 	Card drawnCard = this->cards[0];
 
-	// delete the card from the array/vector
+	// delete the card from the array/vector (at position)
+	this->cards.erase(this->cards.begin());
 
 	// return the card to the caller
+	return drawnCard;
 }
 
 int Deck::GetCardsRemaining()
 {
-	return 0;
+	return this->cards.size();
 }
 
 void Deck::Reset()
@@ -52,5 +62,16 @@ void Deck::Reset()
 			Card crd = Card(j + 1, suit);
 			cards.push_back(crd);
 		}
+	}
+}
+
+void Deck::PrintDeck()
+{
+	cout << "Printing the Deck\n";
+	
+	// for each loop
+	for (Card card : this->cards)
+	{
+		cout << card.ToString() << endl;
 	}
 }
