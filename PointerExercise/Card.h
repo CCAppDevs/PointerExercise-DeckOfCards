@@ -18,9 +18,11 @@ public:
 
 	// getters and setters
 	string GetRank();
+	int GetRankValue() { return this->Rank; }
 	void SetRank(int newRank);
 
 	string GetSuit();
 	void SetSuit(string newSuit);
+	int CompareTo(Card other);
 };
 

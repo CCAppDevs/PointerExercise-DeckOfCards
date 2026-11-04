@@ -52,3 +52,19 @@ void Card::SetSuit(string newSuit)
 {
 	this->Suit = newSuit;
 }
+
+int Card::CompareTo(Card other)
+{
+	if (this->Rank == other.GetRankValue())
+	{
+		return 0;
+	}
+	else if (this->Rank > other.GetRankValue())
+	{
+		return 1;
+	}
+	else
+	{
+		return -1;
+	}
+}

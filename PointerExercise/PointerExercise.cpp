@@ -2,7 +2,11 @@
 #include "Card.h"
 #include "Deck.h"
 
+// game of hi/low
+
 using namespace std;
+
+bool Evaluate(char prediction, Card prev, Card current);
 
 int main()
 {
@@ -13,23 +17,50 @@ int main()
 
 	bool isPlaying = true;
 
+	// draw a card to "start" the game
+	Card prev = deck.DrawCard();
+
 	while (isPlaying)
 	{
-		// game of hi/low
+		cout << "The previous card is: " << prev.ToString() << endl;
 
-		// Each round the dealer will have the previous card showing
-		// The player will choose high or low based on what they have seen
-		int choice = -1;
+		cout << "Do you think the next card is (H)igh or (L)ow? ";
+		char choice;
 
+		cin >> choice; // TODO: make this always a capital.
 
-		// capture the player's choice here
-		// Then the dealer will flip the next card.
+		Card current = deck.DrawCard();
 
-		// If the card matches the "call"
-		//		continue playing
-		// if the card does not match the call
-		//		game over (isPlaying = false)
+		if (Evaluate(choice, prev, current))
+		{
+			// congrats, continue
+			cout << "CONGRATS! Lets play again!\n";
+			prev = current;
+		}
+		else
+		{
+			// game over, exit
+			cout << "You Lose! Game Over!\n";
+			isPlaying = false;
+		}
 	}
 
 	
+}
+
+bool Evaluate(char prediction, Card prev, Card current)
+{
+	int predictionValue = -1;
+
+	if (prediction == 'H')
+	{
+		predictionValue = 1;
+	}
+
+	if ((current.CompareTo(prev) == 0) || (current.CompareTo(prev) == predictionValue)) // same
+	{
+		return true;
+	}
+
+	return false;
 }
